@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aléthéia | Musclez l'esprit de vos enfants</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Space+Grotesk:wght@400;700&display=swap');
+        
+        :root {
+            --bg: #090935;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --indigo-light: #1a1a4e;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--indigo-light), var(--bg));
+        }
+
+        .logo {
+            font-family: 'Cinzel Decorative';
+            color: var(--gold);
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .headline {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            max-width: 900px;
+            margin: 40px auto;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .subheadline {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 650px;
+            margin: 0 auto 50px;
+        }
+
+        .cta-button {
+            background: var(--gold);
+            color: var(--bg);
+            padding: 22px 50px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        section {
+            padding: 100px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: border 0.3s;
+        }
+
+        .feature-card:hover { border-color: var(--gold); }
+
+        .feature-card h3 {
+            color: var(--gold);
+            font-family: 'Cinzel Decorative';
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .highlight { color: var(--gold); }
+
+        @media (max-width: 768px) {
+            header { padding: 60px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">ALÉTHÉIA</div>
+        <h1 class="headline">L'IA qui muscle le cerveau de vos enfants <span class="highlight">sur papier.</span></h1>
+        <p class="subheadline">Arrêtez la passivité devant les écrans. Aléthéia utilise l'IA pour forcer la réflexion manuelle, débusquer les sophismes et réveiller l'intelligence critique.</p>
+        <a href="https://t.me/+Fon2ltdbEcc3N2Nh" class="cta-button">Rejoindre la Bêta Privée</a>
+    </header>
+
+    <section id="features">
+        <div class="features">
+            <div class="feature-card">
+                <h3>Le Secret du Papier</h3>
+                <p>La seule méthode au monde où l'IA ne donne pas la réponse, mais valide un raisonnement <span class="highlight">dessiné à la main</span> sur un Codex physique.</p>
+            </div>
+            <div class="feature-card">
+                <h3>L'Adversité Logique</h3>
+                <p>Nos agents ne sont pas polis. Ils mentent, manipulent et tendent des pièges pour forcer l'enfant à muscler ses capacités d'analyse.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Prestige Académique</h3>
+                <p>Un design minimaliste et prestigieux qui transforme le travail intellectuel en une quête initiatique digne d'une société secrète.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        © 2026 WEBMODERNE | Protéger l'indépendance de l'esprit humain.
+    </footer>
+
+</body>
+</html>
