@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aléthéia Live Prototype</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Space+Grotesk:wght@400;700&display=swap');
+        
+        body {
+            background: #000;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Cadre du Téléphone */
+        .phone {
+            width: 320px;
+            height: 640px;
+            background: #090935;
+            border: 12px solid #1e272e;
+            border-radius: 40px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            font-family: 'Cinzel Decorative';
+            color: #d4af37;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Zone de Caméra / Scan */
+        .camera-view {
+            width: 280px;
+            height: 350px;
+            background: #1a1a4e;
+            margin-top: 30px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* Image du papier dans la caméra (simulation) */
+        .paper-mockup {
+            width: 100%;
+            height: 100%;
+            background: #fdf5e6;
+            opacity: 0.8;
+            background-image: radial-gradient(#ccc 1px, transparent 1px);
+            background-size: 15px 15px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Ligne de Scan Laser */
+        .scan-line {
+            position: absolute;
+            top: -5px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #d4af37;
+            box-shadow: 0 0 15px #d4af37;
+            z-index: 10;
+            animation: scanMove 3s infinite ease-in-out;
+        }
+
+        @keyframes scanMove {
+            0% { top: 0%; }
+            50% { top: 98%; }
+            100% { top: 0%; }
+        }
+
+        /* Points de détection intelligents */
+        .detect-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #2ed573;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            display: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .btn-action {
+            margin-top: 40px;
+            background: #d4af37;
+            color: #090935;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .info-text {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.7rem;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="phone">
+        <div class="screen">
+            <div class="header">ALÉTHÉIA</div>
+            <div class="info-text">POSITIONNE TON CODEX DANS LE CADRE</div>
+
+            <div class="camera-view">
+                <div class="scan-line"></div>
+                <div class="paper-mockup">
+                    <div style="border: 1px solid #ddd; height: 40px; margin-bottom: 20px;"></div>
+                    <div style="display: flex; gap: 10px; margin-bottom: 40px;">
+                        <div style="width: 30px; height: 30px; border: 1px dashed red; border-radius: 50%;"></div>
+                        <div style="width: 30px; height: 30px; border: 1px dashed #ccc; border-radius: 50%;"></div>
+                    </div>
+                    <div style="border: 1px solid #ddd; height: 100px; position: relative;">
+                        <div style="position:absolute; top:10px; left:10px; color:red; font-size: 8pt;">✎ Ligne détectée...</div>
+                    </div>
+                </div>
+
+                <!-- Points de détections simulés -->
+                <div class="detect-point" style="display:block; top: 100px; left: 40px; animation-delay: 0.1s;"></div>
+                <div class="detect-point" style="display:block; top: 220px; left: 140px; animation-delay: 0.5s;"></div>
+            </div>
+
+            <button class="btn-action" onclick="alert('Analyse terminée ! Regarde ton rapport.')">ANALYSER</button>
+            <div class="info-text">LOGIC ENGINE V1.0 - CONNECTÉ</div>
+        </div>
+    </div>
+
+</body>
+</html>

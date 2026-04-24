@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aléthéia - Décodeur de Vérité</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@500&display=swap');
+        
+        :root {
+            --bg: #090935;
+            --gold: #d4af37;
+            --success: #2ed573;
+            --error: #ff4757;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: radial-gradient(circle at 50% 50%, #1a1a4e 0%, #090935 100%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .header { margin-bottom: 40px; }
+        .logo { font-family: 'Cinzel Decorative'; color: var(--gold); font-size: 2.5rem; letter-spacing: 4px; }
+
+        .upload-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px dashed var(--gold);
+            padding: 40px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .upload-card:hover { background: rgba(212, 175, 55, 0.1); transform: translateY(-5px); }
+
+        .upload-card i { font-size: 3rem; display: block; margin-bottom: 15px; }
+
+        .status { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--gold); margin-bottom: 20px; min-height: 20px; }
+
+        .result-panel {
+            display: none;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--gold);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: left;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .result-item { display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+        .dot-valide { background: var(--success); box-shadow: 0 0 10px var(--success); }
+        .dot-invalide { background: var(--error); box-shadow: 0 0 10px var(--error); }
+
+        .sphinx-msg { font-style: italic; color: var(--gold); margin-top: 20px; font-size: 1.1rem; line-height: 1.4; text-align: center; border-top: 1px double var(--gold); padding-top: 15px; }
+
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        button.main-btn {
+            background: var(--gold);
+            color: var(--bg);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">ALÉTHÉIA</div>
+            <div style="font-size: 0.8rem; margin-top: 10px; letter-spacing: 2px;">DÉCODEUR DE RÉALITÉ</div>
+        </div>
+
+        <div id="uploadZone" class="upload-card">
+            <span>📸</span>
+            <div style="margin-top: 10px;">PRENDRE EN PHOTO TON CODEX</div>
+            <div style="font-size: 0.7rem; opacity: 0.6; margin-top: 5px;">(Clique pour simuler la capture)</div>
+        </div>
+
+        <div id="loading" class="loading-spinner"></div>
+        <div id="statusText" class="status"></div>
+
+        <div id="resultPanel" class="result-panel">
+            <div style="font-weight: bold; margin-bottom: 20px; font-family: 'Cinzel Decorative'; color: var(--gold); text-align:center;">RAPPORT DE VÉRITÉ</div>
+            
+            <div class="result-item">
+                <span>Étape I : Observation</span>
+                <span id="step1Status" class="status-dot"></span>
+            </div>
+            <div class="result-item">
+                <span>Étape II : Cartographie</span>
+                <span id="step2Status" class="status-dot"></span>
+            </div>
+            <div class="result-item">
+                <span>Verdict : Logic Sword</span>
+                <span id="verdictStatus" class="status-dot"></span>
+            </div>
+
+            <div id="sphinxComment" class="sphinx-msg"></div>
+
+            <button class="main-btn" style="margin-top: 30px; width: 100%;" onclick="window.location.reload()">MISSION SUIVANTE</button>
+        </div>
+    </div>
+
+    <script>
+        const uploadZone = document.getElementById('uploadZone');
+        const loading = document.getElementById('loading');
+        const statusText = document.getElementById('statusText');
+        const resultPanel = document.getElementById('resultPanel');
+
+        uploadZone.onclick = () => {
+            uploadZone.style.display = 'none';
+            loading.style.display = 'block';
+            
+            const timeline = [
+                { t: 0, msg: "TÉLÉCHARGEMENT DU CODEX..." },
+                { t: 1000, msg: "DÉCRYPTAGE DE LA VISION..." },
+                { t: 2000, msg: "ANALYSE DES FIOLLES LOGIQUES..." },
+                { t: 3000, msg: "RÉFLEXION DU SPHINX..." },
+                { t: 4000, msg: "VERDICT PRÊT." }
+            ];
+
+            timeline.forEach(step => {
+                setTimeout(() => {
+                    statusText.innerText = step.msg;
+                }, step.t);
+            });
+
+            setTimeout(showResults, 4500);
+        };
+
+        function showResults() {
+            loading.style.display = 'none';
+            statusText.style.display = 'none';
+            resultPanel.style.display = 'block';
+
+            // Simulate result based on our previous successful analysis
+            document.getElementById('step1Status').className = 'status-dot dot-valide';
+            document.getElementById('step2Status').className = 'status-dot dot-invalide';
+            document.getElementById('verdictStatus').className = 'status-dot dot-invalide';
+
+            document.getElementById('sphinxComment').innerText = "\"Sacrebleu ! Tu as vu clair à travers mon illusion sur l'eau... mais ta cartographie est brouillonne et ton argument sur l'Air est incomplet. Retourne à ton grimoire, la vérité n'est pas encore totalement à toi !\"";
+        }
+    </script>
+</body>
+</html>

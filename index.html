@@ -78,6 +78,15 @@
             margin: 0 auto;
         }
 
+        .demo-section {
+            background: rgba(255,255,255,0.03);
+            text-align: center;
+            border-radius: 40px;
+            padding: 60px 40px;
+            border: 1px double var(--gold);
+            margin: 40px auto;
+        }
+
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -91,8 +100,6 @@
             border: 1px solid rgba(212, 175, 55, 0.3);
             transition: border 0.3s;
         }
-
-        .feature-card:hover { border-color: var(--gold); }
 
         .feature-card h3 {
             color: var(--gold);
@@ -110,10 +117,6 @@
         }
 
         .highlight { color: var(--gold); }
-
-        @media (max-width: 768px) {
-            header { padding: 60px 20px; }
-        }
     </style>
 </head>
 <body>
@@ -124,6 +127,21 @@
         <p class="subheadline">Arrêtez la passivité devant les écrans. Aléthéia utilise l'IA pour forcer la réflexion manuelle, débusquer les sophismes et réveiller l'intelligence critique.</p>
         <a href="https://t.me/+Fon2ltdbEcc3N2Nh" class="cta-button">Rejoindre la Bêta Privée</a>
     </header>
+
+    <section>
+        <div class="demo-section">
+            <h2 style="font-family: 'Cinzel Decorative'; color: var(--gold); margin-bottom: 30px;">VIVRE L'EXPÉRIENCE</h2>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="app-live.html" class="cta-button" style="font-size: 1rem; border: 1px solid var(--gold); background: transparent; color: var(--gold);">
+                    📱 Voir le Scanner IA
+                </a>
+                <a href="demo.html" class="cta-button" style="font-size: 1rem;">
+                    🔍 Tester le Décodeur
+                </a>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 20px; opacity: 0.6;">(Versions prototypes pour démonstration technique)</p>
+        </div>
+    </section>
 
     <section id="features">
         <div class="features">
